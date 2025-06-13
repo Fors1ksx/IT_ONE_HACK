@@ -1,74 +1,116 @@
-# Website Parser
+# AI Website Modifier
 
-A beautiful web interface that allows users to parse any website and view its HTML, CSS, and JavaScript components.
+## Описание проекта
+AI Website Modifier - это инструмент для анализа и модификации веб-сайтов с помощью искусственного интеллекта. Проект позволяет анализировать HTML, CSS и JavaScript код, а также предлагать улучшения и модификации с помощью AI-ассистента.
 
-## Features
+## Команда разработчиков
+- **Крутояров Вячеслав** - MLE/Backend
+- **Усенко Тимофей** - MLE
+- **Роман Соловьев** - MLE/Frontend
 
-- Modern and responsive UI
-- Real-time website parsing
-- Detailed analysis of:
-  - Basic information (title)
-  - Meta tags
-  - Links
-  - Scripts
-  - Stylesheets
-  - Images
-- Beautiful animations and transitions
-- Error handling and loading states
+## Демо
+Проект развернут и доступен по адресу: [https://egkjwlv8eg71du-1000.proxy.runpod.net/](https://egkjwlv8eg71du-1000.proxy.runpod.net/)
 
-## Installation
+## Функциональность
+- Анализ HTML, CSS и JavaScript кода
+- Предложение улучшений и модификаций
+- Интерактивный AI-ассистент для помощи в модификации кода
+- Просмотр и редактирование исходного кода
+- Анализ мета-тегов, ссылок, скриптов и стилей
 
-1. Clone the repository:
-```bash
-git clone <repository-url>
-cd website-parser
-```
+## Алгоритм работы сервиса
+1. **Парсинг веб-сайта**
+   - Загрузка и анализ HTML-структуры
+   - Извлечение CSS и JavaScript файлов
+   - Анализ мета-тегов и других важных элементов
 
-2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
+2. **Обработка кода**
+   - Токенизация и анализ кода
+   - Выявление потенциальных проблем и возможностей для улучшения
+   - Структурирование кода для дальнейшего анализа
 
-3. Install dependencies:
+3. **AI-анализ**
+   - Использование предобученной модели для анализа кода
+   - Генерация рекомендаций по улучшению
+   - Предложение конкретных изменений
+
+4. **Модификация кода**
+   - Применение предложенных изменений
+   - Валидация модифицированного кода
+   - Сохранение истории изменений
+
+5. **Интерактивное взаимодействие**
+   - Обработка запросов пользователя
+   - Генерация контекстно-зависимых ответов
+   - Предоставление объяснений предлагаемых изменений
+
+## Технический стек
+- Python
+- PyTorch
+- Transformers
+- CUDA (для GPU-ускорения)
+
+## Используемая модель
+Проект использует предобученную языковую модель **deepseek-ai/deepseek-coder-33b-instruct** - специализированную модель для работы с кодом, разработанную DeepSeek AI.
+
+### Характеристики модели:
+- **Название**: deepseek-coder-33b-instruct
+- **Размер**: 33B параметров
+- **Архитектура**: AutoModelForCausalLM
+- **Тип**: Декодер-трансформер
+- **Точность**: float16 (для оптимизации памяти)
+- **Кеширование**: Включено для оптимизации производительности
+
+### Параметры генерации:
+- **max_new_tokens**: 1000
+- **temperature**: 0.3 (для более определенных ответов)
+- **top_p**: 0.9
+- **top_k**: 50
+- **repetition_penalty**: 1.2
+- **early_stopping**: True
+
+### Системный промпт:
+Модель использует специализированный системный промпт, который настраивает её на:
+- Предоставление конкретных и выполнимых изменений кода
+- Правильное форматирование блоков кода
+- Объяснение каждого изменения
+- Запрос уточнений при неясных запросах
+- Фокус на одном изменении за раз
+- Валидацию предлагаемых изменений
+
+### Оптимизация:
+- Использование float16 для экономии памяти
+- Автоматическое распределение модели по доступным устройствам
+- Кеширование модели для быстрой загрузки
+- Оптимизированная токенизация с padding_side="left"
+
+## Установка и запуск
+
+Перейдите по ссылке на хостинг
+
+          или 
+
+1. Клонируйте репозиторий
+2. Установите зависимости:
 ```bash
 pip install -r requirements.txt
 ```
+3. Скачайте веса модели с https://huggingface.co/deepseek-ai/deepseek-coder-33b-instruct:
 
-## Usage
+```bash
+python model_install.py
+```
 
-1. Start the Flask application:
+4. Запустите приложение:
 ```bash
 python app.py
 ```
 
-2. Open your web browser and navigate to:
-```
-http://localhost:5000
-```
+## Структура проекта
+- `model.py` - Основной класс AI-ассистента
+- `app.py` - Веб-приложение
+- `requirements.txt` - Зависимости проекта
+- `model_cache/` - Директория с весами модели на нашем сервере
 
-3. Enter a website URL in the input field and click "Parse"
-
-## Requirements
-
-- Python 3.7+
-- Flask
-- requests
-- beautifulsoup4
-- python-dotenv
-
-## Project Structure
-
-```
-website-parser/
-├── app.py              # Main Flask application
-├── requirements.txt    # Python dependencies
-├── static/
-│   └── style.css      # Custom CSS styles
-└── templates/
-    └── index.html     # Main HTML template
-```
-
-## License
-
-MIT License 
+## Лицензия
+MIT 
